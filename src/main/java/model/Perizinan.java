@@ -4,10 +4,6 @@
  */
 package model;
 
-/**
- *
- * @author Otniel
- */
 public class Perizinan {
 
     private final String nomorIzin;
@@ -22,10 +18,20 @@ public class Perizinan {
         String tanggalBerlaku
     ) {
 
-        this.nomorIzin = nomorIzin;
-        this.platNomor = platNomor;
-        this.jenisIzin = jenisIzin;
-        this.tanggalBerlaku = tanggalBerlaku;
+        this.nomorIzin = periksaIsi(nomorIzin, "Nomor izin");
+        this.platNomor = periksaIsi(platNomor, "Plat nomor");
+        this.jenisIzin = periksaIsi(jenisIzin, "Jenis izin");
+        this.tanggalBerlaku = periksaIsi(tanggalBerlaku, "Tanggal berlaku");
+    }
+
+    // private: pengecekan data tidak boleh kosong, dipakai constructor dan setter
+    private static String periksaIsi(String nilai, String nama) {
+
+        if (nilai == null || nilai.trim().isEmpty()) {
+            throw new IllegalArgumentException(nama + " tidak boleh kosong.");
+        }
+
+        return nilai.trim();
     }
 
     public String getNomorIzin() {
@@ -37,7 +43,7 @@ public class Perizinan {
     }
 
     public void setPlatNomor(String platNomor) {
-        this.platNomor = platNomor;
+        this.platNomor = periksaIsi(platNomor, "Plat nomor");
     }
 
     public String getJenisIzin() {
@@ -45,7 +51,7 @@ public class Perizinan {
     }
 
     public void setJenisIzin(String jenisIzin) {
-        this.jenisIzin = jenisIzin;
+        this.jenisIzin = periksaIsi(jenisIzin, "Jenis izin");
     }
 
     public String getTanggalBerlaku() {
@@ -53,6 +59,6 @@ public class Perizinan {
     }
 
     public void setTanggalBerlaku(String tanggalBerlaku) {
-        this.tanggalBerlaku = tanggalBerlaku;
+        this.tanggalBerlaku = periksaIsi(tanggalBerlaku, "Tanggal berlaku");
     }
 }

@@ -5,17 +5,24 @@
 package model;
 
 /**
- *
- * @author Otniel
+ * Kendaraan yang berstatus layak.
+ * Access modifier: public (bisa diakses package lain).
+ * final pada class: class ini tidak bisa diwariskan lagi.
  */
-public class KendaraanLayak extends Kendaraan {
+public final class KendaraanLayak extends Kendaraan {
 
+    // private: hanya dipakai di dalam class ini
+    // final: nilainya tetap, tidak bisa diubah
+    private static final String KETERANGAN =
+        "Kendaraan layak digunakan.";
+
+    // public: constructor harus bisa dipanggil dari controller
+    // Kondisi tidak diminta lagi, karena class ini pasti "Layak"
     public KendaraanLayak(
         String platNomor,
         String jenis,
         String merk,
-        int tahun,
-        String kondisi
+        int tahun
     ) {
 
         super(
@@ -23,14 +30,19 @@ public class KendaraanLayak extends Kendaraan {
             jenis,
             merk,
             tahun,
-            kondisi
+            LAYAK
         );
     }
 
-    public void cekKelayakan() {
+    // Overriding abstract method
+    @Override
+    public String getKeterangan() {
+        return KETERANGAN;
+    }
 
-        System.out.println(
-            "Kendaraan layak digunakan."
-        );
+    // Overriding method dari Object
+    @Override
+    public String toString() {
+        return "[LAYAK] " + getInfo(true);
     }
 }
